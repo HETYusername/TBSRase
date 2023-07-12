@@ -16,6 +16,7 @@ public class MovementSystem : MonoBehaviour
     public Vector3 newCarPosition;
     private bool isMoving = false;
     private SpriteRenderer targetRender;
+    private Quaternion targetRotation;
 
 
 
@@ -32,7 +33,8 @@ public class MovementSystem : MonoBehaviour
 
     private void ChangeCarPosition() {
         carDirection = target.transform.position - car.transform.position;
-        car.transform.up = carDirection;
+        targetRotation = Quaternion.LookRotation(carDirection);
+        car.transform.rotation = targetRotation;
         newCarPosition = target.transform.position;
         carCharacteristics.currentSpeedMPerSec = Vector3.Distance(car.transform.position, newCarPosition) / carCharacteristics.moveDurationTimeSec;
         

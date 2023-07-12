@@ -1,0 +1,87 @@
+{
+    "name": "GameControls",
+    "maps": [
+        {
+            "name": "PlayerInputs",
+            "id": "7182d3fc-542d-47c4-bad0-46d6ee019d29",
+            "actions": [
+                {
+                    "name": "Pinch [Touch]",
+                    "type": "Value",
+                    "id": "de347206-17c2-4fec-afdf-9be7068ead25",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Scroll [Mouse]",
+                    "type": "Value",
+                    "id": "a8ba2c66-03da-457e-9cc0-812cff8380d9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3dad437d-e835-47ea-be60-c0be40ce9294",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll [Mouse]",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Two Modifiers",
+                    "id": "ae22c169-a9b1-4ac3-aa8b-2f17d19cca36",
+                    "path": "TwoModifiers",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pinch [Touch]",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier1",
+                    "id": "1ece06d0-fe53-4785-9a02-1546f31d8550",
+                    "path": "<Touchscreen>/touch0/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pinch [Touch]",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "modifier2",
+                    "id": "3fd9e949-5ce7-4ab8-8701-7cc30c782bab",
+                    "path": "<Touchscreen>/touch1/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pinch [Touch]",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "d4a2ac16-2e49-42fc-8b63-65622ac5eda8",
+                    "path": "<Touchscreen>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pinch [Touch]",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

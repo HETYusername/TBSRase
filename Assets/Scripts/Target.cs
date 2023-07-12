@@ -17,7 +17,7 @@ public class Target : MonoBehaviour {
     private Ray ray;
     private float angle;
     private Vector3 directionToMove;
-
+    private Quaternion targetRotation;
 
 
     void Start() {
@@ -30,14 +30,13 @@ public class Target : MonoBehaviour {
     }
 
     void OnMouseDrag() {
-        // Get ray which starts from the main camera and goes through the mouse position
+        // Get ray which starts from the main cinemachineVirtualCamera and goes through the mouse position
         ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo)) {
             mousePosition = hitInfo.point;
         }
         mousePosition.y = 0;
-        Debug.Log(mousePosition);
         directionToMove = mousePosition - car.transform.position;
 
         angle = Vector3.SignedAngle(directionToMove, movementSystem.carDirection, movementSystem.carDirection);
@@ -48,8 +47,11 @@ public class Target : MonoBehaviour {
 
         if (Mathf.Abs(angle) <= carCharacteristics.steeringAngel * (1 - carCharacteristics.currentSpeedMPerSec / carCharacteristics.maxSpeedMPerSec)) {
 
-            Vector3 restrictedPosition = car.transform.position + directionToMove.normalized * distance;
+            // Rotate target to the move direction
+            targetRotation = Quaternion.LookRotation(directionToMove);
+            transform.rotation = targetRotation;
 
+            Vector3 restrictedPosition = car.transform.position + directionToMove.normalized * distance;
             transform.position = restrictedPosition;
         }
         else {
