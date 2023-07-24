@@ -16,6 +16,7 @@ public class MovementSystem : MonoBehaviour
     public Vector3 newCarPosition;
     private bool isMoving = false;
     private SpriteRenderer targetRender;
+    private GameObject visionCone;
     private Quaternion targetRotation;
 
 
@@ -23,6 +24,7 @@ public class MovementSystem : MonoBehaviour
     private void Awake() {
         carDirection = target.transform.position - car.transform.position;
         targetRender = target.GetComponentInChildren<SpriteRenderer>();
+        visionCone = car.transform.Find("VisionCone").gameObject;
     }
 
     public void MakeMove() {
@@ -60,6 +62,7 @@ public class MovementSystem : MonoBehaviour
         if (isMoving) {
             targetRender.enabled = false;
             canvas.enabled = false;
+            visionCone.SetActive(false);
 
             car.transform.position = Vector3.MoveTowards(car.transform.position, newCarPosition, carCharacteristics.currentSpeedMPerSec * Time.deltaTime);
         }
@@ -68,6 +71,7 @@ public class MovementSystem : MonoBehaviour
             isMoving = false;
             targetRender.enabled = true;
             canvas.enabled = true;
+            visionCone.SetActive(true);
         }
     }
 }

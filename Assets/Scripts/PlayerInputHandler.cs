@@ -54,6 +54,7 @@ public class PlayerInputHandler : MonoBehaviour {
     public void Zoom(float distance) {
         distance = distance * 0.01f;
         cinemachineVirtualCamera.m_Lens.FieldOfView -= distance;
+
     }
 
 }
