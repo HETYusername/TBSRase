@@ -1,16 +1,21 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
-public class PlayerInputHandler : MonoBehaviour {
+public class CameraControlHandler : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
+    [SerializeField] private float zoomSpeed = 0.2f;
+    [SerializeField] private float zoomMinLimit = 40;
+    [SerializeField] private float zoomMaxLimit = 200;
 
+    private CinemachineFramingTransposer cinemachineFramingTransposer;
     private void Awake() {
+
+        cinemachineFramingTransposer = cinemachineVirtualCamera.GetComponentInChildren<CinemachineFramingTransposer>();
+
         // Enable enhanced touch support if not already
         if (!EnhancedTouchSupport.enabled)
             EnhancedTouchSupport.Enable();
@@ -52,9 +57,14 @@ public class PlayerInputHandler : MonoBehaviour {
     }
 
     public void Zoom(float distance) {
-        distance = distance * 0.01f;
-        cinemachineVirtualCamera.m_Lens.FieldOfView -= distance;
-
+        distance = distance * zoomSpeed;
+        cinemachineFramingTransposer.m_TrackedObjectOffset.y -= distance;
+        if (cinemachineFramingTransposer.m_TrackedObjectOffset.y < zoomMinLimit) {
+            cinemachineFramingTransposer.m_TrackedObjectOffset.y = zoomMinLimit;
+        }
+        if (cinemachineFramingTransposer.m_TrackedObjectOffset.y > zoomMaxLimit) {
+            cinemachineFramingTransposer.m_TrackedObjectOffset.y = zoomMaxLimit;
+        }
     }
 
 }
